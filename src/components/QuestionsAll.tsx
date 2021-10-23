@@ -21,8 +21,16 @@ export default function QuestionView(props: any) {
     return array;
   };
 
-  let { option_one, label, option_two, option_three, option_four, correct_answer } =
-    props.context;
+  let {
+    option_one,
+    label,
+    option_two,
+    option_three,
+    option_four,
+    correct_answer,
+  } = props.context;
+
+  let { cache } = props;
 
   let answers = [option_one, option_two, option_three, option_four];
   let shuffled = shuffle(answers);
@@ -55,7 +63,8 @@ export default function QuestionView(props: any) {
                   ],
                   correct: correct_answer,
                   chosen: a,
-                  group: "all"
+                  group: "all",
+                  cache
                 },
               }}
             >

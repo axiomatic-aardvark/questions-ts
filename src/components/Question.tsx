@@ -26,6 +26,8 @@ export default function QuestionView(props: any) {
 
   let { group } = props;
 
+  let { cache } = props;
+
   let answers = [option_one, option_two, option_three, option_four];
   let shuffled = shuffle(answers);
   let formatted = shuffled.map((a) => {
@@ -57,7 +59,8 @@ export default function QuestionView(props: any) {
                   ],
                   correct: correct_answer,
                   chosen: a,
-                  group
+                  group,
+                  cache
                 },
               }}
             >

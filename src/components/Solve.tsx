@@ -38,37 +38,41 @@ export default function Solve() {
   };
 
   let location: any = useLocation();
-  console.log(location);
-  const [questions, setQuestions] = useState<any[] | undefined>();
+  let cache = location.state.cache;
+
+  const [questions, setQuestions] = useState<any[] | undefined>(cache);
 
   useEffect(() => {
-    const axios = require("axios");
+    if (cache === undefined) {
+      const axios = require("axios");
 
-    axios
-      .get(
-        `https://mysterious-garden-19556.herokuapp.com/https://www.questions-server.xyz/questions/kind/${titleCase(
-          location.state.group
-        )}`
-      )
-      .then(function (response: any) {
-        console.log(response);
-        console.log("THIS ", response.data);
-
-        setQuestions(response.data);
-      })
-      .catch(function (error: any) {
-        console.log(error);
-
-        toast.error("Възникна грешка", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          progress: undefined,
-          closeButton: false,
+      axios
+        .get(
+          `https://mysterious-garden-19556.herokuapp.com/https://www.questions-server.xyz/questions/kind/${titleCase(
+            location.state.group
+          )}`
+        )
+        .then(function (response: any) {
+          console.log(response);
+          console.log("THIS ", response.data);
+  
+          setQuestions(response.data);
+        })
+        .catch(function (error: any) {
+          console.log(error);
+  
+          toast.error("Възникна грешка", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            progress: undefined,
+            closeButton: false,
+          });
         });
-      });
+    }
+  
   }, []);
 
   return questions ? (
@@ -79,6 +83,7 @@ export default function Solve() {
           <QuestionView
             context={shuffle(questions)[0]}
             group={location.state.group}
+            cache = {questions}
           />
 
           <ToastContainer

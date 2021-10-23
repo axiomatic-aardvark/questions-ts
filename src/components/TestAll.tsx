@@ -31,35 +31,39 @@ export default function TestAll() {
   };
 
   let location: any = useLocation();
+  let cache = location.state ? location.state.cache : undefined;
+
   console.log(location);
-  const [questions, setQuestions] = useState<any[] | undefined>();
+  const [questions, setQuestions] = useState<any[] | undefined>(cache);
 
   useEffect(() => {
-    const axios = require("axios");
+    if (cache === undefined) {
+      const axios = require("axios");
 
-    axios
-      .get(
-        "https://mysterious-garden-19556.herokuapp.com/https://www.questions-server.xyz/questions"
-      )
-      .then(function (response: any) {
-        console.log(response);
-        console.log("THIS ", response.data);
+      axios
+        .get(
+          "https://mysterious-garden-19556.herokuapp.com/https://www.questions-server.xyz/questions"
+        )
+        .then(function (response: any) {
+          console.log(response);
+          console.log("THIS ", response.data);
 
-        setQuestions(response.data);
-      })
-      .catch(function (error: any) {
-        console.log(error);
+          setQuestions(response.data);
+        })
+        .catch(function (error: any) {
+          console.log(error);
 
-        toast.error("Възникна грешка", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          progress: undefined,
-          closeButton: false,
+          toast.error("Възникна грешка", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            progress: undefined,
+            closeButton: false,
+          });
         });
-      });
+    }
   }, []);
 
   return questions ? (
@@ -67,9 +71,7 @@ export default function TestAll() {
       <>
         <Back />
         <div className="question-container">
-          <QuestionViewAll
-            context={shuffle(questions)[0]}
-          />
+          <QuestionViewAll context={shuffle(questions)[0]} cache = {questions}/>
 
           <ToastContainer
             position="top-center"

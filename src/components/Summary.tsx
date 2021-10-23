@@ -7,7 +7,7 @@ import "../styles/solve.scss";
 export default function Summary() {
   let location: any = useLocation();
   console.log(location.state);
-  let { label, answers, correct, chosen, group } = location.state;
+  let { label, answers, correct, chosen, group, cache } = location.state;
 
   let formatted = answers.map((a: any) => {
     if (a.endsWith(";")) {
@@ -54,8 +54,8 @@ export default function Summary() {
           style={{ textDecoration: "none" }}
           to={
             group === "all"
-              ? { pathname: "test-all" }
-              : { pathname: "solve", state: { group } }
+              ? { pathname: "test-all", state: { cache } }
+              : { pathname: "solve", state: { group, cache } }
           }
         >
           <Button variant="contained">Нов въпрос</Button>
