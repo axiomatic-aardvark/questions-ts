@@ -17,7 +17,7 @@ export default function ChooseKind() {
 
   return (
     <div className="choose-kind-form">
-      <Box sx={{ minWidth: 400, maxWidth: 800 }}>
+      <Box sx={{ minWidth: 300, maxWidth: 500 }}>
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Група</InputLabel>
           <Select
@@ -58,7 +58,10 @@ export default function ChooseKind() {
         </FormControl>
       </Box>
       {group === "" ? null : (
-        <Link style={{ textDecoration: "none" }} to="test-all">
+        <Link
+          style={{ textDecoration: "none" }}
+          to={{ pathname: "solve", state: { group } }}
+        >
           <Button variant="contained">Зареди тест</Button>
         </Link>
       )}
