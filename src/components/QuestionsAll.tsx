@@ -22,6 +22,7 @@ export default function QuestionView(props: any) {
   };
 
   let {
+    id,
     option_one,
     label,
     option_two,
@@ -54,6 +55,7 @@ export default function QuestionView(props: any) {
               to={{
                 pathname: "summary",
                 state: {
+                  id,
                   label,
                   answers: [
                     formatted[0],

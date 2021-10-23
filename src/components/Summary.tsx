@@ -6,8 +6,18 @@ import "../styles/solve.scss";
 
 export default function Summary() {
   let location: any = useLocation();
-  console.log(location.state);
-  let { label, answers, correct, chosen, group, cache } = location.state;
+  let { id, label, answers, correct, chosen, group, cache } = location.state;
+
+  let updatedCache: any[] = [];
+
+  console.log(id);
+
+  for (let index = 0; index < cache.length; index++) {
+    const q = cache[index];
+    if(q.id !== id){
+      updatedCache.push(q);
+    }
+  }
 
   let formatted = answers.map((a: any) => {
     if (a.endsWith(";")) {
@@ -55,7 +65,7 @@ export default function Summary() {
           to={
             group === "all"
               ? { pathname: "test-all", state: { cache } }
-              : { pathname: "solve", state: { group, cache } }
+              : { pathname: "solve", state: { group, cache: updatedCache } }
           }
         >
           <Button variant="contained">Нов въпрос</Button>

@@ -21,7 +21,7 @@ export default function QuestionView(props: any) {
     return array;
   };
 
-  let { option_one, label, option_two, option_three, option_four, correct_answer } =
+  let { id, option_one, label, option_two, option_three, option_four, correct_answer } =
     props.context;
 
   let { group } = props;
@@ -50,6 +50,7 @@ export default function QuestionView(props: any) {
               to={{
                 pathname: "summary",
                 state: {
+                  id,
                   label,
                   answers: [
                     formatted[0],
