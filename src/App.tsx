@@ -2,18 +2,22 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./components/Home";
 import TestKind from "./components/TestKind";
 import Solve from "./components/Solve";
+import TestAll from "./components/TestAll";
 import Summary from "./components/Summary";
+import AddQuestion from "./components/AddQuestion";
 
 const App = () => {
   return (
     <Router>
       <Switch>
-        <Route path="/add-question"></Route>
+        <Route path="/add-question">
+        <AddQuestion />
+        </Route>
         <Route path="/test-kind">
           <TestKind />
         </Route>
         <Route path="/test-all">
-          {/* { TODO } */}
+          <TestAll />
         </Route>
         <Route path="/solve">
           <Solve />

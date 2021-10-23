@@ -7,16 +7,9 @@ import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Link } from "react-router-dom";
 import Back from "./Back";
-import QuestionView from "./Question";
+import QuestionViewAll from "./QuestionsAll";
 
-export default function Solve() {
-  // TODO: Move these to utils file
-  const titleCase = (str: string) => {
-    return str.replace(/\w\S*/g, (t) => {
-      return t.charAt(0).toUpperCase() + t.substr(1).toLowerCase();
-    });
-  };
-
+export default function TestAll() {
   const shuffle = (array: any[]) => {
     let currentIndex = array.length,
       randomIndex;
@@ -46,9 +39,7 @@ export default function Solve() {
 
     axios
       .get(
-        `https://mysterious-garden-19556.herokuapp.com/https://www.questions-server.xyz/questions/kind/${titleCase(
-          location.state.group
-        )}`
+        "https://mysterious-garden-19556.herokuapp.com/https://www.questions-server.xyz/questions"
       )
       .then(function (response: any) {
         console.log(response);
@@ -76,9 +67,8 @@ export default function Solve() {
       <>
         <Back />
         <div className="question-container">
-          <QuestionView
+          <QuestionViewAll
             context={shuffle(questions)[0]}
-            group={location.state.group}
           />
 
           <ToastContainer

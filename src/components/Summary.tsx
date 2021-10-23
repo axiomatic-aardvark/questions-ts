@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import Button from "@mui/material/Button";
+import Back from "./Back";
 import { Link } from "react-router-dom";
 import "../styles/solve.scss";
 
@@ -20,36 +21,46 @@ export default function Summary() {
   }
 
   return (
-    <div className="question-container">
-      <div className="label">{label}</div>
+    <>
+      <Back />
+      <div className="question-container">
+        <div className="label">{label}</div>
 
-      <div className="answers">
-        {formatted.map((a: any, i: any) => {
-          // right
-          if (a === correct) {
-            return (
-              <div key={i} className="option green">
-                {formatted[i]}
-              </div>
-            );
-          } else if (a === chosen && a !== correct) {
-            return (
-              <div key={i} className="option red">
-                {formatted[i]}
-              </div>
-            );
-          } else {
-            return (
-              <div key={i} className="option">
-                {formatted[i]}
-              </div>
-            );
+        <div className="answers">
+          {formatted.map((a: any, i: any) => {
+            // right
+            if (a === correct) {
+              return (
+                <div key={i} className="option green">
+                  {formatted[i]}
+                </div>
+              );
+            } else if (a === chosen && a !== correct) {
+              return (
+                <div key={i} className="option red">
+                  {formatted[i]}
+                </div>
+              );
+            } else {
+              return (
+                <div key={i} className="option">
+                  {formatted[i]}
+                </div>
+              );
+            }
+          })}
+        </div>
+        <Link
+          style={{ textDecoration: "none" }}
+          to={
+            group === "all"
+              ? { pathname: "test-all" }
+              : { pathname: "solve", state: { group } }
           }
-        })}
+        >
+          <Button variant="contained">Нов въпрос</Button>
+        </Link>
       </div>
-      <Link style={{ textDecoration: "none" }} to={{ pathname: "solve", state: { group } }}>
-        <Button variant="contained">Нов въпрос</Button>
-      </Link>
-    </div>
+    </>
   );
 }

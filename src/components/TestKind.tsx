@@ -1,10 +1,14 @@
 import ChooseKind from "./ChooseKind";
-import "../styles/choose-kind.scss"
+import Back from "./Back";
+import "../styles/choose-kind.scss";
 
 export default function TestKind() {
   return (
-    <div className="choose-kind-wrapper">
-      <ChooseKind />
-    </div>
+    <>
+      <Back />
+      <div className="choose-kind-wrapper">
+        <ChooseKind />
+      </div>
+    </>
   );
 }
