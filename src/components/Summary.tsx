@@ -10,8 +10,6 @@ export default function Summary() {
 
   let updatedCache: any[] = [];
 
-  console.log(id);
-
   for (let index = 0; index < cache.length; index++) {
     const q = cache[index];
     if(q.id !== id){
@@ -64,8 +62,8 @@ export default function Summary() {
           style={{ textDecoration: "none" }}
           to={
             group === "all"
-              ? { pathname: "test-all", state: { cache } }
-              : { pathname: "solve", state: { group, cache: updatedCache } }
+              ? { pathname: "test-all", state: { cache: updatedCache.length > 0 ? updatedCache : undefined } }
+              : { pathname: "solve", state: { group, cache: updatedCache.length > 0 ? updatedCache : undefined } }
           }
         >
           <Button variant="contained">Нов въпрос</Button>
