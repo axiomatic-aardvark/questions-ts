@@ -62,7 +62,7 @@ export default function Solve() {
           console.log(error);
   
           toast.error("Възникна грешка", {
-            position: "top-center",
+            position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -87,7 +87,7 @@ export default function Solve() {
           />
 
           <ToastContainer
-            position="top-center"
+            position="top-right"
             autoClose={5000}
             hideProgressBar={false}
             newestOnTop={false}

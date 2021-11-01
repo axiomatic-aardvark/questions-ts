@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 const axios = require("axios");
 
 const AddQuestion = () => {
-  const { control, handleSubmit, reset } = useForm();
+  const { control, handleSubmit, reset, setFocus } = useForm();
   const [kind, setKind] = useState("Fiziologiq");
 
   const changeKind = (e: any) => {
@@ -34,7 +34,7 @@ const AddQuestion = () => {
       correctAnswer === undefined
     ) {
       toast.error("Моля попълнете всички полета", {
-        position: "top-center",
+        position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -62,9 +62,10 @@ const AddQuestion = () => {
       .then(function (response: any) {
         console.log(response);
         reset({});
+        setFocus("label");
 
         toast.success("Готово", {
-          position: "top-center",
+          position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -78,7 +79,7 @@ const AddQuestion = () => {
         console.log(error);
 
         toast.error("Възникна грешка", {
-          position: "top-center",
+          position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -153,7 +154,7 @@ const AddQuestion = () => {
           <input className="form-submit" type="submit" value="Запази" />
         </form>
         <ToastContainer
-          position="top-center"
+          position="top-right"
           autoClose={5000}
           hideProgressBar={false}
           newestOnTop={false}

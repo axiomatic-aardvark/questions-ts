@@ -54,7 +54,7 @@ export default function TestAll() {
           console.log(error);
 
           toast.error("Възникна грешка", {
-            position: "top-center",
+            position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -74,7 +74,7 @@ export default function TestAll() {
           <QuestionViewAll context={shuffle(questions)[0]} cache = {questions}/>
 
           <ToastContainer
-            position="top-center"
+            position="top-right"
             autoClose={5000}
             hideProgressBar={false}
             newestOnTop={false}
