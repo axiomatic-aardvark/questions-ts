@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 export default function Anatomy() {
     return (
         <>
-            <Back />
+            <Back/>
             <div className="anatomy-wrapper home">
                 <Link style={{ textDecoration: "none" }} to="add-question-anatomy">
                     <Button variant="contained">Добави въпрос</Button>

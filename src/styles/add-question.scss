@@ -1,9 +1,10 @@
 .add-question-wrapper {
   display: flex;
   justify-content: center;
+
   form {
     margin-left: 15px;
-    margin-right:15px;
+    margin-right: 15px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -18,13 +19,13 @@
       height: 35px;
     }
 
-    select{
+    select {
       height: 35px
     }
 
     .form-submit {
-      margin-top:30px !important;
-      width:100px !important;
+      margin-top: 30px !important;
+      width: 100px !important;
       margin: 0 auto;
     }
   }

@@ -1,26 +1,24 @@
 import { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { Input as AntdInput } from "antd";
-import "../styles/add-question.scss";
+import "../styles/add-question-anatomy.scss";
 import Back from "./Back";
 
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const axios = require("axios");
 
 const AddQuestionAnatomy = () => {
     const { control, handleSubmit, reset, setFocus } = useForm();
-    const [kind, setKind] = useState("Fiziologiq");
-    const [correctAnswers, setCorrectAnswers] = useState("");
-
+    const [kind, setKind] = useState("dvigatelen");
     const [isOptionOneTrue, setIsOptionOneTrue] = useState(false);
     const [isOptionTwoTrue, setIsOptionTwoTrue] = useState(false);
     const [isOptionThreeTrue, setIsOptionThreeTrue] = useState(false);
     const [isOptionFourTrue, setIsOptionFourTrue] = useState(false);
 
     function toggleTrue(optionNum: number) {
-        switch(optionNum) {
+        switch (optionNum) {
             case 1:
                 setIsOptionOneTrue(!isOptionOneTrue);
                 break;
@@ -50,6 +48,24 @@ const AddQuestionAnatomy = () => {
         let optionThree = data["optionThree"];
         let optionFour = data["optionFour"];
 
+        console.log(isOptionOneTrue, isOptionTwoTrue, isOptionThreeTrue, isOptionFourTrue);
+
+        let correctAnswers = "";
+        if(isOptionOneTrue) {
+            correctAnswers = correctAnswers.concat("%%%", optionOne);
+        }
+        if(isOptionTwoTrue) {
+            correctAnswers = correctAnswers.concat("%%%", optionTwo);
+        }
+        if(isOptionThreeTrue) {
+            correctAnswers = correctAnswers.concat("%%%", optionThree);
+        }
+        if(isOptionFourTrue) {
+            correctAnswers = correctAnswers.concat("%%%", optionFour);
+        }
+
+        console.log(correctAnswers);
+
         if (
             label === undefined ||
             optionOne === undefined ||
@@ -72,7 +88,7 @@ const AddQuestionAnatomy = () => {
 
         axios
             .post(
-                "https://mysterious-garden-19556.herokuapp.com/https://www.questions-server.xyz/questions",
+                "https://mysterious-garden-19556.herokuapp.com/https://www.questions-server.xyz/anatomy",
                 {
                     label,
                     kind: kind,
@@ -81,7 +97,7 @@ const AddQuestionAnatomy = () => {
                     option_three: optionThree,
                     option_four: optionFour,
                     correct_answers: correctAnswers,
-                }
+                },
             )
             .then(function (response: any) {
                 console.log(response);
@@ -117,7 +133,7 @@ const AddQuestionAnatomy = () => {
     // @ts-ignore
     return (
         <>
-            <Back />
+            <Back/>
             <div className="add-question-wrapper">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <label>Въпрос</label>
@@ -126,66 +142,79 @@ const AddQuestionAnatomy = () => {
                         name="label"
                         control={control}
                     />
-                    <label>Опция 1</label>
-                    <Controller
-                        render={({ field }) => <AntdInput {...field} />}
-                        name="optionOne"
-                        control={control}
-                        defaultValue=""
-                    />
-                    <label>
-                        Верен:
-                        <input
-                            name="isGoing"
-                            type="checkbox"
-                            checked={isOptionOneTrue}
-                            onChange={() => toggleTrue(1)} />
-                    </label>
-                    <label>Опция 2</label>
-                    <Controller
-                        render={({ field }) => <AntdInput {...field} />}
-                        name="optionTwo"
-                        control={control}
-                        defaultValue=""
-                    />
-                    <label>
-                        Верен:
-                        <input
-                            name="isGoing"
-                            type="checkbox"
-                            checked={isOptionTwoTrue}
-                            onChange={() => toggleTrue(2)} />
-                    </label>
-                    <label>Опция 3</label>
-                    <Controller
-                        render={({ field }) => <AntdInput {...field} />}
-                        name="optionThree"
-                        control={control}
-                        defaultValue=""
-                    />
-                    <label>
-                        Верен:
-                        <input
-                            name="isGoing"
-                            type="checkbox"
-                            checked={isOptionThreeTrue}
-                            onChange={() => toggleTrue(3)} />
-                    </label>
-                    <label>Опция 4</label>
-                    <Controller
-                        render={({ field }) => <AntdInput {...field} />}
-                        name="optionFour"
-                        control={control}
-                        defaultValue=""
-                    />
-                    <label>
-                        Верен:
-                        <input
-                            name="isGoing"
-                            type="checkbox"
-                            checked={isOptionFourTrue}
-                            onChange={() => toggleTrue(4)} />
-                    </label>
+                    <div className={"option-one"}>
+                        <label>Опция 1</label>
+                        <Controller
+                            render={({ field }) => <AntdInput {...field} />}
+                            name="optionOne"
+                            control={control}
+                            defaultValue=""
+                        />
+                        <label className={"checkbox-container"}>
+                            <span>Верен:</span>
+                            <input
+                                name="isGoing"
+                                className={"checkbox"}
+                                type="checkbox"
+                                checked={isOptionOneTrue}
+                                onChange={() => toggleTrue(1)}/>
+                        </label>
+                    </div>
+                    <div className={"option-two"}>
+                        <label>Опция 2</label>
+                        <Controller
+                            render={({ field }) => <AntdInput {...field} />}
+                            name="optionTwo"
+                            control={control}
+                            defaultValue=""
+                        />
+                        <label className={"checkbox-container"}>
+                        <span>Верен:</span>
+                            <input
+                                name="isGoing"
+                                type="checkbox"
+                                className={"checkbox"}
+                                checked={isOptionTwoTrue}
+                                onChange={() => toggleTrue(2)}/>
+                        </label>
+                    </div>
+                    <div className={"option-three"}>
+                        <label>Опция 3</label>
+                        <Controller
+                            render={({ field }) => <AntdInput {...field} />}
+                            name="optionThree"
+                            control={control}
+                            defaultValue=""
+                        />
+                        <label className={"checkbox-container"}>
+                        <span>Верен:</span>
+                            <input
+                                name="isGoing"
+                                type="checkbox"
+                                className={"checkbox"}
+                                checked={isOptionThreeTrue}
+                                onChange={() => toggleTrue(3)}/>
+                        </label>
+                    </div>
+                    <div className={"option-four"}>
+                        <label>Опция 4</label>
+                        <Controller
+                            render={({ field }) => <AntdInput {...field} />}
+                            name="optionFour"
+                            control={control}
+                            defaultValue=""
+                        />
+                        <label className={"checkbox-container"}>
+                        <span>Верен:</span>
+                            <input
+                                name="isGoing"
+                                className={"checkbox"}
+                                type="checkbox"
+                                checked={isOptionFourTrue}
+                                onChange={() => toggleTrue(4)}/>
+                        </label>
+                    </div>
+
                     <label>Група</label>
                     <select className="select-css" onChange={changeKind} value={kind}>
                         <option value="dvigatelen">Двигателен апарат</option>
@@ -204,7 +233,7 @@ const AddQuestionAnatomy = () => {
                         <option value="dolen">Долен крайник</option>
                     </select>
 
-                    <input className="form-submit" type="submit" value="Запази" />
+                    <input className="form-submit" type="submit" value="Запази"/>
                 </form>
                 <ToastContainer
                     position="top-right"

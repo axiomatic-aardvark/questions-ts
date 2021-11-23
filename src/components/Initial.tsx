@@ -6,7 +6,7 @@ import "../styles/home.scss";
 export default function Initial() {
     return (
         <>
-            <Back />
+            <Back/>
             <div className="home">
                 <Link style={{ textDecoration: "none" }} to="physiology">
                     <Button variant="contained">Физиология</Button>
