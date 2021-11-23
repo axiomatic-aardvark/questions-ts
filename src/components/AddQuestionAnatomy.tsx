@@ -12,6 +12,30 @@ const axios = require("axios");
 const AddQuestionAnatomy = () => {
     const { control, handleSubmit, reset, setFocus } = useForm();
     const [kind, setKind] = useState("Fiziologiq");
+    const [correctAnswers, setCorrectAnswers] = useState("");
+
+    const [isOptionOneTrue, setIsOptionOneTrue] = useState(false);
+    const [isOptionTwoTrue, setIsOptionTwoTrue] = useState(false);
+    const [isOptionThreeTrue, setIsOptionThreeTrue] = useState(false);
+    const [isOptionFourTrue, setIsOptionFourTrue] = useState(false);
+
+    function toggleTrue(optionNum: number) {
+        switch(optionNum) {
+            case 1:
+                setIsOptionOneTrue(!isOptionOneTrue);
+                break;
+            case 2:
+                setIsOptionTwoTrue(!isOptionTwoTrue);
+                break;
+            case 3:
+                setIsOptionThreeTrue(!isOptionThreeTrue);
+                break;
+            case 4:
+                setIsOptionFourTrue(!isOptionFourTrue);
+                break;
+        }
+    }
+
 
     const changeKind = (e: any) => {
         setKind(e.target.value);
@@ -21,17 +45,17 @@ const AddQuestionAnatomy = () => {
         console.log(JSON.stringify(data));
 
         let label = data["label"];
-        let correctAnswer = data["correctAnswer"];
         let optionOne = data["optionOne"];
         let optionTwo = data["optionTwo"];
         let optionThree = data["optionThree"];
+        let optionFour = data["optionFour"];
 
         if (
             label === undefined ||
             optionOne === undefined ||
             optionTwo === undefined ||
             optionThree === undefined ||
-            correctAnswer === undefined
+            optionFour === undefined
         ) {
             toast.error("Моля попълнете всички полета", {
                 position: "top-right",
@@ -51,12 +75,12 @@ const AddQuestionAnatomy = () => {
                 "https://mysterious-garden-19556.herokuapp.com/https://www.questions-server.xyz/questions",
                 {
                     label,
-                    option_one: correctAnswer,
-                    option_two: optionOne,
-                    option_three: optionTwo,
-                    option_four: optionThree,
-                    correct_answer: correctAnswer,
                     kind: kind,
+                    option_one: optionOne,
+                    option_two: optionTwo,
+                    option_three: optionThree,
+                    option_four: optionFour,
+                    correct_answers: correctAnswers,
                 }
             )
             .then(function (response: any) {
@@ -90,6 +114,7 @@ const AddQuestionAnatomy = () => {
             });
     };
 
+    // @ts-ignore
     return (
         <>
             <Back />
@@ -101,13 +126,6 @@ const AddQuestionAnatomy = () => {
                         name="label"
                         control={control}
                     />
-                    <label>Верен отговор</label>
-                    <Controller
-                        render={({ field }) => <AntdInput {...field} />}
-                        name="correctAnswer"
-                        control={control}
-                        defaultValue=""
-                    />
                     <label>Опция 1</label>
                     <Controller
                         render={({ field }) => <AntdInput {...field} />}
@@ -115,6 +133,14 @@ const AddQuestionAnatomy = () => {
                         control={control}
                         defaultValue=""
                     />
+                    <label>
+                        Верен:
+                        <input
+                            name="isGoing"
+                            type="checkbox"
+                            checked={isOptionOneTrue}
+                            onChange={() => toggleTrue(1)} />
+                    </label>
                     <label>Опция 2</label>
                     <Controller
                         render={({ field }) => <AntdInput {...field} />}
@@ -122,6 +148,14 @@ const AddQuestionAnatomy = () => {
                         control={control}
                         defaultValue=""
                     />
+                    <label>
+                        Верен:
+                        <input
+                            name="isGoing"
+                            type="checkbox"
+                            checked={isOptionTwoTrue}
+                            onChange={() => toggleTrue(2)} />
+                    </label>
                     <label>Опция 3</label>
                     <Controller
                         render={({ field }) => <AntdInput {...field} />}
@@ -129,6 +163,29 @@ const AddQuestionAnatomy = () => {
                         control={control}
                         defaultValue=""
                     />
+                    <label>
+                        Верен:
+                        <input
+                            name="isGoing"
+                            type="checkbox"
+                            checked={isOptionThreeTrue}
+                            onChange={() => toggleTrue(3)} />
+                    </label>
+                    <label>Опция 4</label>
+                    <Controller
+                        render={({ field }) => <AntdInput {...field} />}
+                        name="optionFour"
+                        control={control}
+                        defaultValue=""
+                    />
+                    <label>
+                        Верен:
+                        <input
+                            name="isGoing"
+                            type="checkbox"
+                            checked={isOptionFourTrue}
+                            onChange={() => toggleTrue(4)} />
+                    </label>
                     <label>Група</label>
                     <select className="select-css" onChange={changeKind} value={kind}>
                         <option value="dvigatelen">Двигателен апарат</option>
