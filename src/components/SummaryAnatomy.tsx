@@ -39,28 +39,15 @@ export default function SummaryAnatomy() {
                 <div className="answers">
                     {formatted.map((a: any, i: any) => {
                         // right
-                        if (correct.includes(a) && chosen.includes(a)) {
+                        if (correct.includes(a)) {
                             return (
                                 <div key={i} className="option green">
                                     {formatted[i]}
                                 </div>
                             );
-                        } else if (chosen.includes(a) && !correct.includes(a)) {
+                        }   else {
                             return (
                                 <div key={i} className="option red">
-                                    {formatted[i]}
-                                </div>
-                            );
-                        }
-                        else if (!chosen.includes(a) && correct.includes(a)) {
-                            return (
-                                <div key={i} className="option red">
-                                    {formatted[i]}
-                                </div>
-                            );
-                        } else {
-                            return (
-                                <div key={i} className="option">
                                     {formatted[i]}
                                 </div>
                             );
