@@ -4,10 +4,12 @@ import Anatomy from "./components/Anatomy";
 import TestKind from "./components/TestKind";
 import Solve from "./components/Solve";
 import TestAll from "./components/TestAll";
+import TestAllAnatomy from "./components/TestAllAnatomy";
 import Summary from "./components/Summary";
 import AddQuestion from "./components/AddQuestion";
 import Initial from "./components/Initial";
 import AddQuestionAnatomy from "./components/AddQuestionAnatomy";
+import SummaryAnatomy from "./components/SummaryAnatomy";
 
 const App = () => {
     return (
@@ -25,11 +27,17 @@ const App = () => {
                 <Route path="/test-all">
                     <TestAll/>
                 </Route>
+                <Route path="/test-all-anatomy">
+                    <TestAllAnatomy/>
+                </Route>
                 <Route path="/solve">
                     <Solve/>
                 </Route>
                 <Route path="/summary">
                     <Summary/>
+                </Route>
+                <Route path="/summary-anatomy">
+                    <SummaryAnatomy/>
                 </Route>
                 <Route path="/physiology">
                     <Home/>

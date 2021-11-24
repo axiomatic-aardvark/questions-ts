@@ -51,16 +51,16 @@ const AddQuestionAnatomy = () => {
         console.log(isOptionOneTrue, isOptionTwoTrue, isOptionThreeTrue, isOptionFourTrue);
 
         let correctAnswers = "";
-        if(isOptionOneTrue) {
+        if (isOptionOneTrue) {
             correctAnswers = correctAnswers.concat("%%%", optionOne);
         }
-        if(isOptionTwoTrue) {
+        if (isOptionTwoTrue) {
             correctAnswers = correctAnswers.concat("%%%", optionTwo);
         }
-        if(isOptionThreeTrue) {
+        if (isOptionThreeTrue) {
             correctAnswers = correctAnswers.concat("%%%", optionThree);
         }
-        if(isOptionFourTrue) {
+        if (isOptionFourTrue) {
             correctAnswers = correctAnswers.concat("%%%", optionFour);
         }
 
@@ -169,7 +169,7 @@ const AddQuestionAnatomy = () => {
                             defaultValue=""
                         />
                         <label className={"checkbox-container"}>
-                        <span>Верен:</span>
+                            <span>Верен:</span>
                             <input
                                 name="isGoing"
                                 type="checkbox"
@@ -187,7 +187,7 @@ const AddQuestionAnatomy = () => {
                             defaultValue=""
                         />
                         <label className={"checkbox-container"}>
-                        <span>Верен:</span>
+                            <span>Верен:</span>
                             <input
                                 name="isGoing"
                                 type="checkbox"
@@ -205,7 +205,7 @@ const AddQuestionAnatomy = () => {
                             defaultValue=""
                         />
                         <label className={"checkbox-container"}>
-                        <span>Верен:</span>
+                            <span>Верен:</span>
                             <input
                                 name="isGoing"
                                 className={"checkbox"}
