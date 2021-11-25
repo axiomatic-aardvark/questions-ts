@@ -112,7 +112,7 @@ export default function QuestionViewAnatomy(props: any) {
                         },
                     }}
                 >
-                    <Button variant="contained">Готово</Button>
+                    <Button className={"submit"} variant="contained">Готово</Button>
                 </Link>
             </div>
         </>
