@@ -11,7 +11,7 @@ const axios = require("axios");
 
 const AddQuestion = () => {
     const { control, handleSubmit, reset, setFocus } = useForm();
-    const [kind, setKind] = useState("Fiziologiq");
+    const [kind, setKind] = useState("Kruv");
 
     const changeKind = (e: any) => {
         setKind(e.target.value);
@@ -131,7 +131,6 @@ const AddQuestion = () => {
                     />
                     <label>Група</label>
                     <select className="select-css" onChange={changeKind} value={kind}>
-                        <option value="Fiziologiq">Обща физиология</option>
                         <option value="Kruv">Кръв</option>
                         <option value="Muskuli">Мускули</option>
                         <option value="Surdechno-sudova">Сердечно-съдова система</option>

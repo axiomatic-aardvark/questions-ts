@@ -9,6 +9,8 @@ export default function SummaryAnatomy() {
 
     console.log("chosen " + chosen);
     console.log("correct " + correct);
+    console.log("GROUPP " + group);
+
 
     let updatedCache: any[] = [];
 
@@ -63,7 +65,7 @@ export default function SummaryAnatomy() {
                                 state: { cache: updatedCache.length > 0 ? updatedCache : undefined },
                             }
                             : {
-                                pathname: "solve",
+                                pathname: "solve-anatomy",
                                 state: { group, cache: updatedCache.length > 0 ? updatedCache : undefined },
                             }
                     }

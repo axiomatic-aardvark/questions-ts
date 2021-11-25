@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 
 export default function QuestionViewAnatomy(props: any) {
+    let { group } = props;
+
     const [hasBeenShuffled, setHasBeenShuffled] = useState(false);
 
     const [isOptionOneSelected, setIsOptionOneSelected] = useState(false);
@@ -105,7 +107,7 @@ export default function QuestionViewAnatomy(props: any) {
                             ],
                             correct: correct_answers,
                             chosen: chosenAnswers,
-                            group: "all",
+                            group,
                             cache,
                         },
                     }}

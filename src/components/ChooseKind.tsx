@@ -27,7 +27,6 @@ export default function ChooseKind() {
                         label="Група"
                         onChange={handleChange}
                     >
-                        <MenuItem value={"fiziologiq"}>Обща Физиология</MenuItem>
                         <MenuItem value={"kruv"}>Кръв</MenuItem>
                         <MenuItem value={"muskuli"}>Мускули</MenuItem>
                         <MenuItem value={"surdechno-sudova"}>
