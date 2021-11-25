@@ -47,8 +47,7 @@ export default function ChooseKindAnatomy() {
                         <MenuItem value={"korem"}>
                             Корем
                         </MenuItem>
-                        <MenuItem value={"goren"}>Горен крайник</MenuItem>
-                        <MenuItem value={"dolen"}>Долен крайник</MenuItem>
+                        <MenuItem value={"krainici"}>Крайници</MenuItem>
                     </Select>
                 </FormControl>
             </Box>

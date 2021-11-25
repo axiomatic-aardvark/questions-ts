@@ -227,10 +227,9 @@ const AddQuestionAnatomy = () => {
                         <option value="grub">Гръб</option>
                         <option value="gurdi">Гърди</option>
                         <option value="korem">Корем</option>
-                        <option value="goren">
-                            Горен крайник
+                        <option value="krainici">
+                            Крайници
                         </option>
-                        <option value="dolen">Долен крайник</option>
                     </select>
 
                     <input className="form-submit" type="submit" value="Запази"/>
