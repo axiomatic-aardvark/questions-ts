@@ -42,9 +42,13 @@ export default function QuestionView(props: any) {
         return a;
     });
 
+    const addColonIfNone = (label: string) => {
+        return label.endsWith(":") ? label : label.concat(":");
+    }
+
     return (
         <>
-            <div className="label">{label}</div>
+            <div className="label">{addColonIfNone(label)}</div>
 
             <div className="answers">
                 {formatted.map((a, i) => {

@@ -32,11 +32,15 @@ export default function SummaryAnatomy() {
         correct = correct.substring(0, correct.length - 1);
     }
 
+    const addColonIfNone = (label: string) => {
+        return label.endsWith(":") ? label : label.concat(":");
+    }
+
     return (
         <>
             <Back/>
             <div className="question-container">
-                <div className="label">{label}</div>
+                <div className="label">{addColonIfNone(label)}</div>
 
                 <div className="answers">
                     {formatted.map((a: any, i: any) => {

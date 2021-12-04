@@ -73,10 +73,13 @@ export default function QuestionViewAnatomy(props: any) {
         chosenAnswers = chosenAnswers.concat("%%%", formatted[3]);
     }
 
+    const addColonIfNone = (label: string) => {
+        return label.endsWith(":") ? label : label.concat(":");
+    }
+
     return (
         <>
-            <div className="label">{label}</div>
-
+            <div className="label">{addColonIfNone(label)}</div>
             <div className="answers">
                 <div className={`option ${isOptionOneSelected ? "chosen" : ""}`} onClick={() => {
                     console.log("uuh")
