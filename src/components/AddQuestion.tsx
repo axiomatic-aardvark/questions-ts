@@ -48,7 +48,7 @@ const AddQuestion = () => {
 
         axios
             .post(
-                "https://mysterious-garden-19556.herokuapp.com/http://www.questions-server.xyz/questions",
+                "https://mysterious-garden-19556.herokuapp.com/https://www.questions-server.xyz/questions",
                 {
                     label,
                     option_one: correctAnswer,

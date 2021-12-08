@@ -47,7 +47,7 @@ export default function SolveAnatomy() {
 
             axios
                 .get(
-                    `https://mysterious-garden-19556.herokuapp.com/http://www.questions-server.xyz/anatomy/kind/${titleCase(
+                    `https://mysterious-garden-19556.herokuapp.com/https://www.questions-server.xyz/anatomy/kind/${titleCase(
                         location.state.group,
                     )}`,
                 )

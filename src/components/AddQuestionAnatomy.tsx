@@ -88,7 +88,7 @@ const AddQuestionAnatomy = () => {
 
         axios
             .post(
-                "https://mysterious-garden-19556.herokuapp.com/http://www.questions-server.xyz/anatomy",
+                "https://mysterious-garden-19556.herokuapp.com/https://www.questions-server.xyz/anatomy",
                 {
                     label,
                     kind: kind,
