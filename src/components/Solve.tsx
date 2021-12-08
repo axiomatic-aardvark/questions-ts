@@ -47,7 +47,7 @@ export default function Solve() {
 
             axios
                 .get(
-                    `https://mysterious-garden-19556.herokuapp.com/https://www.questions-server.xyz/questions/kind/${titleCase(
+                    `https://mysterious-garden-19556.herokuapp.com/http://www.questions-server.xyz/questions/kind/${titleCase(
                         location.state.group,
                     )}`,
                 )

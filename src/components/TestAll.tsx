@@ -41,7 +41,7 @@ export default function TestAll() {
 
             axios
                 .get(
-                    "https://mysterious-garden-19556.herokuapp.com/https://www.questions-server.xyz/questions",
+                    "https://mysterious-garden-19556.herokuapp.com/http://www.questions-server.xyz/questions",
                 )
                 .then(function (response: any) {
                     console.log(response);
