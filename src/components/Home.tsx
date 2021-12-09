@@ -11,6 +11,9 @@ export default function Home() {
                 <Link style={{ textDecoration: "none" }} to="test-all">
                     <Button variant="contained">Тест Всички</Button>
                 </Link>
+                <Link style={{ textDecoration: "none" }} to="test-kinds">
+                    <Button variant="contained">Тест Групи</Button>
+                </Link>
                 <Link style={{ textDecoration: "none" }} to="test-kind">
                     <Button variant="contained">Тест Група</Button>
                 </Link>
