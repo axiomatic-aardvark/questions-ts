@@ -7,6 +7,8 @@ import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import Back from "./Back";
 import QuestionViewAll from "./QuestionsAll";
+import { useHistory } from 'react-router-dom'
+
 
 export default function TestAll() {
     const shuffle = (array: any[]) => {
@@ -34,6 +36,20 @@ export default function TestAll() {
 
     console.log(location);
     const [questions, setQuestions] = useState<any[] | undefined>(cache);
+    const [question, setQuestion] = useState();
+
+    const history = useHistory()
+
+    useEffect(() => {
+        return history.listen(location => {
+            if (history.action === 'POP') {
+                localStorage.setItem("popped", "true");
+                localStorage.setItem("contents", JSON.stringify({
+                    question
+                }));
+            }
+        })
+    }, [question])
 
     useEffect(() => {
         if (cache === undefined) {
@@ -48,6 +64,8 @@ export default function TestAll() {
                     console.log("THIS ", response.data);
 
                     setQuestions(response.data);
+                    let shuffled = shuffle(response.data);
+                    setQuestion(shuffled[0]);
                 })
                 .catch(function (error: any) {
                     console.log(error);
@@ -62,15 +80,32 @@ export default function TestAll() {
                         closeButton: false,
                     });
                 });
+        } else {
+            // @ts-ignore
+            let isPaused = localStorage.getItem("popped");
+            if(isPaused === "true") {
+                console.log("Skipping update")
+                let q = localStorage.getItem("contents");
+                // @ts-ignore
+                console.log(q.question);
+                // @ts-ignore
+                setQuestion(JSON.parse(q).question);
+            } else {
+                // @ts-ignore
+                let shuffled = shuffle(questions);
+                setQuestion(shuffled[0]);
+            }
         }
+
+        localStorage.clear();
     }, []);
 
-    return questions ? (
+    return questions && question ? (
         questions.length > 0 ? (
             <>
                 <Back/>
                 <div className="question-container">
-                    <QuestionViewAll context={shuffle(questions)[0]} cache={questions}/>
+                    <QuestionViewAll context={question} cache={questions}/>
 
                     <ToastContainer
                         position="top-right"
