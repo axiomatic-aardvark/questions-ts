@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import Back from "./Back";
 import QuestionViewAll from "./QuestionsAll";
+import { useHistory } from 'react-router-dom'
 
 export default function TestAll() {
     const shuffle = (array: any[]) => {
@@ -34,6 +35,38 @@ export default function TestAll() {
 
     console.log(location);
     const [questions, setQuestions] = useState<any[] | undefined>(cache);
+    const [saved, setSaved] = useState<string | null>("");
+
+    const addColonIfNone = (label: string) => {
+        return label.endsWith(":") ? label : label.concat(":");
+    }
+
+    let question = questions ? shuffle(questions)[0] : undefined;
+
+    let id = question ? question.id : undefined;
+    let option_one = question ? question.option_one : undefined;
+    let label = question ? question.label : undefined;
+    let option_two = question ? question.option_two : undefined;
+    let option_three = question ? question.option_three : undefined;
+    let option_four = question ? question.option_four : undefined;
+    let correct_answer = question ? question.correct_answer : undefined;
+
+    let answers = [option_one, option_two, option_three, option_four];
+    let shuffled = shuffle(answers);
+    let formatted = questions ? shuffled.map((a) => {
+        if (a.endsWith(";")) {
+            return a.substring(0, a.length - 1);
+        }
+        return a;
+    }) : [];
+
+    useEffect(() => {
+        console.log("what's inside?");
+        console.log(localStorage.getItem("saved"))
+        setSaved(localStorage.getItem("saved"));
+
+        localStorage.clear()
+    }, [])
 
     useEffect(() => {
         if (cache === undefined) {
@@ -65,12 +98,35 @@ export default function TestAll() {
         }
     }, []);
 
+    const history = useHistory()
+
+    useEffect(() => {
+        return history.listen(location => {
+            if (history.action === 'POP') {
+                console.log("Saving...");
+
+                console.log(JSON.stringify({
+                    id, option_one, label, option_two, option_three, option_four, correct_answer
+                }));
+
+                localStorage.setItem("saved", JSON.stringify({
+                    id, option_one, label, option_two, option_three, option_four, correct_answer
+                }));
+            }
+        })
+    }, [])
+
     return questions ? (
         questions.length > 0 ? (
             <>
                 <Back/>
                 <div className="question-container">
-                    <QuestionViewAll context={shuffle(questions)[0]} cache={questions}/>
+                    <QuestionViewAll context={{
+                        id,
+                        label: addColonIfNone(label),
+                        formatted,
+                        correct_answer
+                    }} cache={questions}/>
 
                     <ToastContainer
                         position="top-right"

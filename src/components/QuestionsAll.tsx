@@ -23,35 +23,19 @@ export default function QuestionView(props: any) {
 
     let {
         id,
-        option_one,
         label,
-        option_two,
-        option_three,
-        option_four,
-        correct_answer,
+        formatted,
+        correct_answer
     } = props.context;
 
     let { cache } = props;
 
-    let answers = [option_one, option_two, option_three, option_four];
-    let shuffled = shuffle(answers);
-    let formatted = shuffled.map((a) => {
-        if (a.endsWith(";")) {
-            return a.substring(0, a.length - 1);
-        }
-        return a;
-    });
-
-    const addColonIfNone = (label: string) => {
-        return label.endsWith(":") ? label : label.concat(":");
-    }
-
     return (
         <>
-            <div className="label">{addColonIfNone(label)}</div>
+            <div className="label">{label}</div>
 
             <div className="answers">
-                {formatted.map((a, i) => {
+                {formatted.map((a: any, i: any) => {
                     return (
                         <Link
                             key={i}
