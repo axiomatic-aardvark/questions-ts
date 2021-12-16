@@ -5,3 +5,12 @@
     margin-left: 5px;
   }
 }
+
+.header {
+  display: flex;
+  flex-direction: row;
+
+  .home {
+    padding-right: 7px;
+  }
+}

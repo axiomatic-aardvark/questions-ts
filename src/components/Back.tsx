@@ -4,10 +4,12 @@ import "../styles/back.scss";
 
 export default function Back() {
     return (
-        <Link style={{ textDecoration: "none" }} to="/">
-            <div className="img-container">
-                <img src={home} alt="house"/>
-            </div>
-        </Link>
+        <div className={"header"}>
+            <Link style={{ textDecoration: "none" }} to="/">
+                <div className="img-container home">
+                    <img src={home} alt="house"/>
+                </div>
+            </Link>
+        </div>
     );
 }

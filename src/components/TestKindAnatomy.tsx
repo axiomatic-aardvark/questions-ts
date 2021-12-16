@@ -1,4 +1,3 @@
-import ChooseKind from "./ChooseKind";
 import Back from "./Back";
 import "../styles/choose-kind.scss";
 import ChooseKindAnatomy from "./ChooseKindAnatomy";

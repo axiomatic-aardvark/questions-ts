@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import Back from "./Back";
 import QuestionViewAll from "./QuestionsAll";
+import history from "../images/history.png";
 
 export default function TestAll() {
     const shuffle = (array: any[]) => {
@@ -31,9 +32,60 @@ export default function TestAll() {
 
     let location: any = useLocation();
     let cache = location.state ? location.state.cache : undefined;
+    let prev = location.state ? location.state.prev || undefined : undefined;
+    let p_answers = prev ? prev.answers : undefined;
+    let p_label = prev ? prev.label : undefined;
+    let p_chosen = prev ? prev.chosen : undefined;
+    let p_correct = prev ? prev.correct : undefined;
+
+    let c_answers = location.state ? location.state.curr ? location.state.curr.c_answers : undefined : undefined;
+    let c_label = location.state ? location.state.curr ? location.state.curr.c_label : undefined : undefined;
+    let c_correct = location.state ? location.state.curr ? location.state.curr.c_correct : undefined : undefined;
+    let c_id = location.state ? location.state.curr ? location.state.curr.c_id : undefined : undefined;
+
+    console.log("CURR ");
+    //console.log(location.state.curr);
+
+
+    console.log("prev is");
+    console.log(prev);
 
     console.log(location);
+
     const [questions, setQuestions] = useState<any[] | undefined>(cache);
+
+    // @ts-ignore
+    let {
+        id,
+        option_one,
+        label,
+        option_two,
+        option_three,
+        option_four,
+        correct_answer,
+    } = questions ? shuffle(questions)[0] : {
+        id: 1,
+        option_one: "",
+        label: "",
+        option_two: "",
+        option_three: "",
+        option_four: "",
+        correct_answer: "",
+    }
+
+    let answers = [option_one, option_two, option_three, option_four];
+    let shuffled = shuffle(answers);
+    let formatted = shuffled.map((a) => {
+        if (a.endsWith(";")) {
+            return a.substring(0, a.length - 1);
+        }
+        return a;
+    });
+
+
+    const addColonIfNone = (label: string) => {
+        return label.endsWith(":") ? label : label.concat(":");
+    }
 
     useEffect(() => {
         if (cache === undefined) {
@@ -68,9 +120,52 @@ export default function TestAll() {
     return questions ? (
         questions.length > 0 ? (
             <>
-                <Back/>
+                <div className={"header"}>
+                    <Back/>
+                    {prev && <Link style={{ textDecoration: "none" }} to={{
+                        pathname: "summary",
+                        state: {
+                            isHistory: true,
+                            id: undefined,
+                            label: p_label,
+                            answers: [
+                                p_answers[0],
+                                p_answers[1],
+                                p_answers[2],
+                                p_answers[3],
+                            ],
+                            correct: p_correct,
+                            chosen: p_chosen,
+                            group: "all",
+                            cache,
+                            current: {
+                                answers: [option_one, option_two, option_four, option_three],
+                                label: addColonIfNone(label),
+                                correct: correct_answer,
+                                id
+                            },
+                        },
+                    }}>
+                        <div className="img-container history" onClick={() => {
+                            console.log("History clicked!")
+                        }
+                        }>
+                            <img src={history} alt="house"/>
+                        </div>
+                    </Link>}
+                </div>
                 <div className="question-container">
-                    <QuestionViewAll context={shuffle(questions)[0]} cache={questions}/>
+                    {location.state && location.state.curr && location.state.curr.c_label ?  <QuestionViewAll context={{
+                        id: c_id,
+                        formatted: c_answers,
+                        label: c_label,
+                        correct: c_correct,
+                    }} cache={questions}/> : <QuestionViewAll context={{
+                        id,
+                        formatted,
+                        label: addColonIfNone(label),
+                        correct_answer,
+                    }} cache={questions}/> }
 
                     <ToastContainer
                         position="top-right"

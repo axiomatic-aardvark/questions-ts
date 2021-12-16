@@ -51,7 +51,7 @@ export default function SummaryAnatomy() {
                                     {formatted[i]}
                                 </div>
                             );
-                        }   else {
+                        } else {
                             return (
                                 <div key={i} className="option red">
                                     {formatted[i]}

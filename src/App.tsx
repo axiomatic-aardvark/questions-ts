@@ -47,6 +47,9 @@ const App = () => {
                 <Route path="/solve-kinds">
                     <SolveKinds/>
                 </Route>
+                <Route path="/prev">
+                    <div>hello</div>
+                </Route>
                 <Route path="/solve-anatomy">
                     <SolveAnatomy/>
                 </Route>

@@ -78,16 +78,20 @@ export default function QuestionViewAnatomy(props: any) {
             <div className="answers">
                 <div className={`option ${isOptionOneSelected ? "chosen" : ""}`} onClick={() => {
                     console.log("uuh")
-                    setIsOptionOneSelected(!isOptionOneSelected)}}>
+                    setIsOptionOneSelected(!isOptionOneSelected)
+                }}>
                     {formatted[0]}
                 </div>
-                <div className={`option ${isOptionTwoSelected ? "chosen" : ""}`} onClick={() => setIsOptionTwoSelected(!isOptionTwoSelected)}>
+                <div className={`option ${isOptionTwoSelected ? "chosen" : ""}`}
+                     onClick={() => setIsOptionTwoSelected(!isOptionTwoSelected)}>
                     {formatted[1]}
                 </div>
-                <div className={`option ${isOptionThreeSelected ? "chosen" : ""}`} onClick={() => setIsOptionThreeSelected(!isOptionThreeSelected)}>
+                <div className={`option ${isOptionThreeSelected ? "chosen" : ""}`}
+                     onClick={() => setIsOptionThreeSelected(!isOptionThreeSelected)}>
                     {formatted[2]}
                 </div>
-                <div className={`option ${isOptionFourSelected ? "chosen" : ""}`} onClick={() => setIsOptionFourSelected(!isOptionFourSelected)}>
+                <div className={`option ${isOptionFourSelected ? "chosen" : ""}`}
+                     onClick={() => setIsOptionFourSelected(!isOptionFourSelected)}>
                     {formatted[3]}
                 </div>
                 <Link

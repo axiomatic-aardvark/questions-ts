@@ -5,16 +5,29 @@ import "../styles/solve.scss";
 
 export default function Summary() {
     let location: any = useLocation();
-    let { id, label, answers, correct, chosen, group, cache } = location.state;
+    let { id, label, answers, correct, chosen, group, cache, isHistory } = location.state;
+
+    let c_answers = location.state ? location.state.current ? location.state.current.answers : undefined : undefined;
+    let c_label = location.state ? location.state.current ? location.state.current.label : undefined : undefined;
+    let c_correct = location.state ? location.state.current ? location.state.current.correct : undefined : undefined;
+    let c_id = location.state ? location.state.current ? location.state.current.id : undefined : undefined;
+
+    if (isHistory) {
+        console.log("ITS HISTORY");
+    }
 
     let updatedCache: any[] = [];
 
-    for (let index = 0; index < cache.length; index++) {
-        const q = cache[index];
-        if (q.id !== id) {
-            updatedCache.push(q);
+    // If ID is not provided, that means we're in History
+    if (id) {
+        for (let index = 0; index < cache.length; index++) {
+            const q = cache[index];
+            if (q.id !== id) {
+                updatedCache.push(q);
+            }
         }
     }
+
 
     let formatted = answers.map((a: any) => {
         if (a.endsWith(";")) {
@@ -67,7 +80,11 @@ export default function Summary() {
                         group === "all"
                             ? {
                                 pathname: "test-all",
-                                state: { cache: updatedCache.length > 0 ? updatedCache : undefined },
+                                state: {
+                                    cache: updatedCache.length > 0 ? updatedCache : undefined, prev: {
+                                        label: addColonIfNone(label), answers: formatted, correct, chosen,
+                                    }, curr: { c_answers, c_label, c_correct, c_id },
+                                },
                             }
                             : {
                                 pathname: "solve",
