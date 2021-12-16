@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import "../styles/solve.scss";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -47,6 +47,20 @@ export default function SolveKinds() {
     let cache = location.state.cache;
 
     const [questions, setQuestions] = useState<any[] | undefined>(cache);
+    const [question, setQuestion] = useState();
+
+    const history = useHistory()
+
+    useEffect(() => {
+        return history.listen(location => {
+            if (history.action === 'POP') {
+                localStorage.setItem("popped", "true");
+                localStorage.setItem("contents", JSON.stringify({
+                    question
+                }));
+            }
+        })
+    }, [question])
 
 
     const genEndpoint = (groups: string) => {
@@ -76,6 +90,8 @@ export default function SolveKinds() {
                     console.log("THIS ", response.data);
 
                     setQuestions(response.data);
+                    let shuffled = shuffle(response.data);
+                    setQuestion(shuffled[0]);
                 })
                 .catch(function (error: any) {
                     console.log(error);
@@ -90,17 +106,33 @@ export default function SolveKinds() {
                         closeButton: false,
                     });
                 });
+        } else {
+            // @ts-ignore
+            let isPaused = localStorage.getItem("popped");
+            if(isPaused === "true") {
+                console.log("Skipping update")
+                let q = localStorage.getItem("contents");
+                // @ts-ignore
+                console.log(q.question);
+                // @ts-ignore
+                setQuestion(JSON.parse(q).question);
+            } else {
+                // @ts-ignore
+                let shuffled = shuffle(questions);
+                setQuestion(shuffled[0]);
+            }
         }
 
+        localStorage.clear();
     }, []);
 
     return questions ? (
-        questions.length > 0 ? (
+        questions.length > 0 && question ? (
             <>
                 <Back/>
                 <div className="question-container">
                     <QuestionViewKinds
-                        context={shuffle(questions)[0]}
+                        context={question}
                         groups={location.state.groups}
                         cache={questions}
                     />

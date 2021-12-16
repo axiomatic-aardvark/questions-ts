@@ -100,8 +100,8 @@ export default function TestAll() {
         localStorage.clear();
     }, []);
 
-    return questions && question ? (
-        questions.length > 0 ? (
+    return questions ? (
+        questions.length > 0 && question ? (
             <>
                 <Back/>
                 <div className="question-container">
