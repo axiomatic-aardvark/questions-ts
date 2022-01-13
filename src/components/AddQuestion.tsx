@@ -11,7 +11,7 @@ const axios = require("axios");
 
 const AddQuestion = () => {
     const { control, handleSubmit, reset, setFocus } = useForm();
-    const [kind, setKind] = useState("Kruv");
+    const [kind, setKind] = useState("Obshta-fiziologiq");
 
     const changeKind = (e: any) => {
         setKind(e.target.value);
@@ -92,7 +92,7 @@ const AddQuestion = () => {
 
     return (
         <>
-            <Back/>
+            <Back />
             <div className="add-question-wrapper">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <label>Въпрос</label>
@@ -131,6 +131,7 @@ const AddQuestion = () => {
                     />
                     <label>Група</label>
                     <select className="select-css" onChange={changeKind} value={kind}>
+                        <option value="Obshta-fiziologiq">Обща физиология</option>
                         <option value="Kruv">Кръв</option>
                         <option value="Muskuli">Мускули</option>
                         <option value="Surdechno-sudova">Сердечно-съдова система</option>
@@ -150,7 +151,7 @@ const AddQuestion = () => {
                         <option value="Vegetativna">Вегетативна нервна система</option>
                     </select>
 
-                    <input className="form-submit" type="submit" value="Запази"/>
+                    <input className="form-submit" type="submit" value="Запази" />
                 </form>
                 <ToastContainer
                     position="top-right"

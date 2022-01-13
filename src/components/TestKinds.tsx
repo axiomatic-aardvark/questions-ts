@@ -10,7 +10,7 @@ export default function TestKind() {
     const [trigger, setTrigger] = useState<boolean>(false);
 
     const clickKind = (kind: string) => {
-        if(chosen.includes(kind)) {
+        if (chosen.includes(kind)) {
             let updatedChosen = chosen;
             updatedChosen.splice(updatedChosen.indexOf(kind), 1);
             setChosen(updatedChosen);
@@ -24,8 +24,9 @@ export default function TestKind() {
 
     return (
         <>
-            <Back/>
+            <Back />
             <div className="choose-kinds-wrapper">
+                <span className={`${chosen.includes("obshta-fiziologiq") ? "selected" : ""}`} onClick={() => clickKind("obshta-fiziologiq")}>Обща физилогия</span>
                 <span className={`${chosen.includes("kruv") ? "selected" : ""}`} onClick={() => clickKind("kruv")}>Кръв</span>
                 <span className={`${chosen.includes("muskuli") ? "selected" : ""}`} onClick={() => clickKind("muskuli")}>Мускули</span>
                 <span className={`${chosen.includes("surdechno-sudova") ? "selected" : ""}`} onClick={() => clickKind("surdechno-sudova")}>
@@ -53,7 +54,7 @@ export default function TestKind() {
                 <span className={`${chosen.includes("vegetativna") ? "selected" : ""}`} onClick={() => clickKind("vegetativna")}>
                     Вегетативна нервна система
                 </span>
-                <Link style={{ textDecoration: "none" }} to={{pathname: "solve-kinds", state: { groups: chosen.join('ююю') }}}>
+                <Link style={{ textDecoration: "none" }} to={{ pathname: "solve-kinds", state: { groups: chosen.join('ююю') } }}>
                     <Button variant="contained">Зареди тест</Button>
                 </Link>
             </div>
